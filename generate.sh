@@ -6,29 +6,37 @@ TAG_VERSION="v3.6.0.b10"
 IOS_URL="https://download.videolan.org/pub/cocoapods/unstable/MobileVLCKit-3.6.0b10-615f96dc-4733d1cc.tar.xz"
 MACOS_URL="https://download.videolan.org/pub/cocoapods/unstable/VLCKit-3.6.0b10-615f96dc-4733d1cc.tar.xz"
 TVOS_URL="https://download.videolan.org/cocoapods/unstable/TVVLCKit-3.6.0b10-615f96dc-4733d1cc.tar.xz"
-
+VISIONOS_URL="https://download.videolan.org/pub/cocoapods/unstable/VLCKit-4.0.0a6-038b3223-23b3a86b.tar.xz"
 mkdir .tmp/
 
-#Download and generate MobileVLCKit
+# #Download and generate MobileVLCKit
 wget -O .tmp/MobileVLCKit.tar.xz $IOS_URL
 tar -xf .tmp/MobileVLCKit.tar.xz -C .tmp/
 
-#Download and generate VLCKit
+# #Download and generate VLCKit
 wget -O .tmp/VLCKit.tar.xz $MACOS_URL
 tar -xf .tmp/VLCKit.tar.xz -C .tmp/
 
-#Download and generate TVVLCKit
+# #Download and generate TVVLCKit
 wget -O .tmp/TVVLCKit.tar.xz $TVOS_URL
 tar -xf .tmp/TVVLCKit.tar.xz -C .tmp/
+
+# #Download and generate VisionOSKit
+wget -O .tmp/VLCKit_V.tar.xz $VISIONOS_URL
+tar -xf .tmp/VLCKit_V.tar.xz -C .tmp/
 
 IOS_LOCATION=".tmp/MobileVLCKit-binary/MobileVLCKit.xcframework"
 TVOS_LOCATION=".tmp/TVVLCKit-binary/TVVLCKit.xcframework"
 MACOS_LOCATION=".tmp/VLCKit - binary package/VLCKit.xcframework"
-
+VISIONOS_LOCATION=".tmp/VLCKit-binary/VLCKit.xcframework"
 #Merge into one xcframework
 xcodebuild -create-xcframework \
     -framework "$MACOS_LOCATION/macos-arm64_x86_64/VLCKit.framework" \
     -debug-symbols "${PWD}/$MACOS_LOCATION/macos-arm64_x86_64/dSYMs/VLCKit.framework.dSYM" \
+    -framework "$VISIONOS_LOCATION/xros-arm64/VLCKit.framework" \
+    -debug-symbols "${PWD}/$VISIONOS_LOCATION/xros-arm64/dSYMs/VLCKit.framework.dSYM" \
+    -framework "$VISIONOS_LOCATION/xros-arm64-simulator/VLCKit.framework" \
+    -debug-symbols "${PWD}/$VISIONOS_LOCATION/xros-arm64-simulator/dSYMs/VLCKit.framework.dSYM" \
     -framework "$TVOS_LOCATION/tvos-arm64_x86_64-simulator/TVVLCKit.framework" \
     -debug-symbols "${PWD}/$TVOS_LOCATION/tvos-arm64_x86_64-simulator/dSYMs/TVVLCKit.framework.dSYM" \
     -framework "$TVOS_LOCATION/tvos-arm64/TVVLCKit.framework"  \

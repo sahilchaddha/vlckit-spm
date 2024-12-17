@@ -4,4 +4,6 @@
 @_exported import MobileVLCKit
 #elseif os(macOS)
 @_exported import VLCKit
+#elseif os(visionOS)
+@_exported import VLCKit
 #endif
