@@ -7,7 +7,7 @@ let vlcBinary = Target.binaryTarget(name: "VLCKit-all", url: "https://github.com
 
 let package = Package(
     name: "vlckit-spm",
-    platforms: [.macOS(.v10_13), .iOS(.v11), .tvOS(.v11), .visionOS],
+    platforms: [.macOS(.v10_13), .iOS(.v11), .tvOS(.v11)],
     products: [
         .library(
             name: "VLCKitSPM",
