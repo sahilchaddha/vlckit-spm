@@ -2,8 +2,6 @@
 @_exported import TVVLCKit
 #elseif os(iOS) && !targetEnvironment(macCatalyst)
 @_exported import MobileVLCKit
-#elseif os(macOS)
-@_exported import VLCKit
-#elseif os(visionOS)
+#else
 @_exported import VLCKit
 #endif
